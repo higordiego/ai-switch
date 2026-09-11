@@ -14,6 +14,12 @@ make verify
 End users should prefer:
 
 ```sh
+curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | sh
+```
+
+Go developers can also use:
+
+```sh
 go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
 ```
 
