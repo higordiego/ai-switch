@@ -12,7 +12,7 @@ import (
 	"github.com/higordiego/ai-switch/internal/profile"
 )
 
-const Version = "0.1.1"
+const Version = "0.1.2"
 
 const help = `aiswitch - contas independentes por terminal (macOS/Linux)
 

@@ -2,7 +2,7 @@
 
 ```
 ╭─[ AISWITCH // IDENTITY CONTROL ]─────────────────────────────╮
-│  ◈ AISWITCH                                       v0.1.1     │
+│  ◈ AISWITCH                                       v0.1.2     │
 │  isolated identities for coding agents                       │
 ╰──────────────────────────────────────────────────────────────╯
 ```
@@ -34,7 +34,7 @@ sem ler, copiar ou imprimir secrets.
 
 ---
 
-## O que existe hoje (v0.1.1)
+## O que existe hoje (v0.1.2)
 
 | Área | Suporte real |
 |------|----------------|
@@ -70,7 +70,7 @@ go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
 Versão fixa (release):
 
 ```sh
-go install github.com/higordiego/ai-switch/cmd/aiswitch@v0.1.1
+go install github.com/higordiego/ai-switch/cmd/aiswitch@v0.1.2
 ```
 
 Confirme:
@@ -175,7 +175,7 @@ aiswitch run cursor trabalho -- --plan
 
 ```
 ╭─[ AISWITCH // IDENTITY CONTROL ]─────────────────────────────╮
-│  ◈ AISWITCH                                       v0.1.1     │
+│  ◈ AISWITCH                                       v0.1.2     │
 │  isolated identities for coding agents                       │
 ╰──────────────────────────────────────────────────────────────╯
 
@@ -442,7 +442,7 @@ Não nesta versão. Delete é fluxo da TUI (`[d]` + confirmação `[y]`).
 Não. Para o shell pai use `aiswitch use` depois do `shell-init`.
 
 **`cursor` é o editor?**  
-Não — é o **Cursor Agent CLI**. Desktop fica fora do v0.1.1.
+Não — é o **Cursor Agent CLI**. Desktop fica fora do v0.1.2.
 
 **Tem Gemini?**  
 Não. Roadmap apenas.
