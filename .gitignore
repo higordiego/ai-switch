@@ -1,0 +1,12 @@
+/bin/
+/coverage.out
+/coverage.html
+/.smoke/
+/dist/
+*.exe
+*.test
+.DS_Store
+cursor/
+.idea/
+.vscode/
+*.swp

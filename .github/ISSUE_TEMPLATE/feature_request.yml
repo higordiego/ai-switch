@@ -1,0 +1,37 @@
+name: Feature request
+description: Suggest an idea for aiswitch
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What identity/agent workflow is painful today?
+      placeholder: I need to isolate Gemini CLI the same way as Claude Code...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: How should aiswitch behave?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Workarounds or other tools you already tried.
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: TUI / UX
+        - label: CLI commands
+        - label: New coding agent integration
+        - label: Shell integration
+        - label: Docs / packaging
