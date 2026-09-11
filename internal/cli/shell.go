@@ -10,19 +10,21 @@ func quote(s string) string { return "'" + strings.ReplaceAll(s, "'", "'\"'\"'")
 
 func shellInit(w io.Writer, executable string) {
 	// Function-local assignments only run after validation succeeds. No global default.
-	fmt.Fprintf(w, `aiswitch() {
+	// Primary command matches the repository name: ai-switch.
+	fmt.Fprintf(w, `ai-switch() {
   if [ "${1-}" = use ] || [ "${1-}" = switch ]; then
-    local _aiswitch_exports
+    local _ai_switch_exports
     shift
-    _aiswitch_exports=$(%s env "$@") || return $?
-    eval "$_aiswitch_exports"
+    _ai_switch_exports=$(%s env "$@") || return $?
+    eval "$_ai_switch_exports"
   elif [ "${1-}" = deactivate ]; then
-    if [ "$#" -ne 1 ]; then printf 'uso: aiswitch deactivate\n' >&2; return 2; fi
+    if [ "$#" -ne 1 ]; then printf 'uso: ai-switch deactivate\n' >&2; return 2; fi
     unset AISWITCH_PROFILE
   else
     %s "$@"
   fi
 }
+aiswitch() { ai-switch "$@"; }
 `, quote(executable), quote(executable))
 	for _, pair := range [][2]string{{"claude", "claude"}, {"codex", "codex"}, {"cursor-agent", "cursor"}, {"agent", "cursor"}} {
 		fmt.Fprintf(w, `%s() {

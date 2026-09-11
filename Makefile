@@ -1,7 +1,7 @@
 .PHONY: build test race vet verify tmux-test real-test fuzz install go-install
 
 build:
-	go build -trimpath -o bin/aiswitch ./cmd/aiswitch
+	go build -trimpath -o bin/ai-switch ./cmd/ai-switch
 
 test:
 	go test ./...
@@ -25,8 +25,8 @@ fuzz:
 
 # Local install for contributors (GOPATH/bin — same destination as `go install`).
 go-install:
-	go install ./cmd/aiswitch
+	go install ./cmd/ai-switch
 
 install:
 	mkdir -p "$(HOME)/.local/bin"
-	go build -trimpath -o "$(HOME)/.local/bin/aiswitch" ./cmd/aiswitch
+	go build -trimpath -o "$(HOME)/.local/bin/ai-switch" ./cmd/ai-switch

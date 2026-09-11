@@ -12,33 +12,33 @@ import (
 	"github.com/higordiego/ai-switch/internal/profile"
 )
 
-const Version = "0.1.2"
+const Version = "0.1.3"
 
-const help = `aiswitch - contas independentes por terminal (macOS/Linux)
+const help = `ai-switch - contas independentes por terminal (macOS/Linux)
 
-  aiswitch create PERFIL [PERFIL...]
-  aiswitch rename PERFIL NOVO-PERFIL
-  aiswitch list [--json]
-  aiswitch login TOOL [PERFIL] [-- ARGUMENTOS]
-  aiswitch logout TOOL [PERFIL]
-  aiswitch unlink TOOL [PERFIL]
-  aiswitch status TOOL [PERFIL] [-- ARGUMENTOS]
-  aiswitch run TOOL [PERFIL] [-- ARGUMENTOS]
-  aiswitch current
-  aiswitch doctor [PERFIL]
-  aiswitch shell-init [zsh|bash]
-  aiswitch env PERFIL
+  ai-switch create PERFIL [PERFIL...]
+  ai-switch rename PERFIL NOVO-PERFIL
+  ai-switch list [--json]
+  ai-switch login TOOL [PERFIL] [-- ARGUMENTOS]
+  ai-switch logout TOOL [PERFIL]
+  ai-switch unlink TOOL [PERFIL]
+  ai-switch status TOOL [PERFIL] [-- ARGUMENTOS]
+  ai-switch run TOOL [PERFIL] [-- ARGUMENTOS]
+  ai-switch current
+  ai-switch doctor [PERFIL]
+  ai-switch shell-init [zsh|bash]
+  ai-switch env PERFIL
 
 TOOL: claude, codex, cursor (Cursor Agent CLI).
 Sem PERFIL, usa AISWITCH_PROFILE do terminal; nao existe conta padrao global.
 
 Para habilitar use/switch e os comandos nativos neste terminal:
-  eval "$(aiswitch shell-init zsh)"
-  aiswitch use trabalho
+  eval "$(ai-switch shell-init zsh)"
+  ai-switch use trabalho
   claude
   codex
   cursor-agent
-  aiswitch deactivate
+  ai-switch deactivate
 
 Em outro terminal, escolha outro perfil. Processos abertos mantem sua conta.
 AISWITCH_ROOT altera o armazenamento (padrao: ~/.aiswitch).
@@ -73,20 +73,20 @@ func (a App) Run(args []string) error {
 	command, rest := args[0], args[1:]
 	if command == "version" || command == "--version" {
 		if len(rest) > 0 {
-			return errors.New("uso: aiswitch version")
+			return errors.New("uso: ai-switch version")
 		}
 		fmt.Fprintln(a.Out, Version)
 		return nil
 	}
 	if command == "shell-init" {
 		if len(rest) > 1 || (len(rest) == 1 && rest[0] != "bash" && rest[0] != "zsh") {
-			return errors.New("uso: aiswitch shell-init [bash|zsh]")
+			return errors.New("uso: ai-switch shell-init [bash|zsh]")
 		}
 		shellInit(a.Out, a.Executable)
 		return nil
 	}
 	if command == "use" || command == "switch" || command == "deactivate" {
-		return errors.New("ative a integracao neste terminal: eval \"$(aiswitch shell-init zsh)\"; depois use aiswitch use PERFIL")
+		return errors.New("ative a integracao neste terminal: eval \"$(ai-switch shell-init zsh)\"; depois use ai-switch use PERFIL")
 	}
 	s, err := profile.New(a.getenv("AISWITCH_ROOT"))
 	if err != nil {
@@ -95,7 +95,7 @@ func (a App) Run(args []string) error {
 	switch command {
 	case "create":
 		if len(rest) == 0 {
-			return errors.New("uso: aiswitch create PERFIL [PERFIL...]")
+			return errors.New("uso: ai-switch create PERFIL [PERFIL...]")
 		}
 		for _, name := range rest {
 			if err := profile.ValidateName(name); err != nil {
@@ -112,7 +112,7 @@ func (a App) Run(args []string) error {
 		return nil
 	case "rename":
 		if len(rest) != 2 {
-			return errors.New("uso: aiswitch rename PERFIL NOVO-PERFIL")
+			return errors.New("uso: ai-switch rename PERFIL NOVO-PERFIL")
 		}
 		p, err := s.Rename(rest[0], rest[1])
 		if err != nil {
@@ -122,7 +122,7 @@ func (a App) Run(args []string) error {
 		return nil
 	case "list":
 		if len(rest) > 1 || (len(rest) == 1 && rest[0] != "--json") {
-			return errors.New("uso: aiswitch list [--json]")
+			return errors.New("uso: ai-switch list [--json]")
 		}
 		ps, err := s.List()
 		if err != nil {
@@ -139,12 +139,12 @@ func (a App) Run(args []string) error {
 			fmt.Fprintf(a.Out, "%s %s\n", marker, p.Name)
 		}
 		if len(ps) == 0 {
-			fmt.Fprintln(a.Out, "Nenhum perfil. Use aiswitch create trabalho pessoal")
+			fmt.Fprintln(a.Out, "Nenhum perfil. Use ai-switch create trabalho pessoal")
 		}
 		return nil
 	case "current":
 		if len(rest) != 0 {
-			return errors.New("uso: aiswitch current")
+			return errors.New("uso: ai-switch current")
 		}
 		name := a.getenv("AISWITCH_PROFILE")
 		if name == "" {
@@ -157,7 +157,7 @@ func (a App) Run(args []string) error {
 		return nil
 	case "env":
 		if len(rest) != 1 {
-			return errors.New("uso: aiswitch env PERFIL")
+			return errors.New("uso: ai-switch env PERFIL")
 		}
 		p, err := s.Get(rest[0])
 		if err != nil {
@@ -167,7 +167,7 @@ func (a App) Run(args []string) error {
 		return nil
 	case "doctor":
 		if len(rest) > 1 {
-			return errors.New("uso: aiswitch doctor [PERFIL]")
+			return errors.New("uso: ai-switch doctor [PERFIL]")
 		}
 		name := a.getenv("AISWITCH_PROFILE")
 		if len(rest) == 1 {
@@ -198,7 +198,7 @@ func (a App) Run(args []string) error {
 		if len(removed) > 0 {
 			fmt.Fprintf(a.Out, "Ignoradas no processo filho: %s\n", strings.Join(removed, ", "))
 		}
-		fmt.Fprintln(a.Out, "Login: consulte aiswitch status TOOL PERFIL. Cursor aqui e Agent CLI, nao o editor.")
+		fmt.Fprintln(a.Out, "Login: consulte ai-switch status TOOL PERFIL. Cursor aqui e Agent CLI, nao o editor.")
 		if missing {
 			return errors.New("instale as ferramentas ausentes e execute doctor novamente")
 		}
@@ -221,18 +221,18 @@ func (a App) Run(args []string) error {
 			return err
 		}
 		if len(plan.Removed) > 0 {
-			fmt.Fprintf(a.Err, "aiswitch: ignorando autenticacao herdada: %s\n", strings.Join(plan.Removed, ", "))
+			fmt.Fprintf(a.Err, "ai-switch: ignorando autenticacao herdada: %s\n", strings.Join(plan.Removed, ", "))
 		}
-		fmt.Fprintf(a.Err, "aiswitch: %s / %s\n", p.Name, tool)
+		fmt.Fprintf(a.Err, "ai-switch: %s / %s\n", p.Name, tool)
 		return a.Execute(plan)
 	default:
-		return fmt.Errorf("comando %q desconhecido; use aiswitch --help", command)
+		return fmt.Errorf("comando %q desconhecido; use ai-switch --help", command)
 	}
 }
 
 func parseLaunch(args []string, selected string) (tool, name string, extra []string, err error) {
 	if len(args) == 0 {
-		err = errors.New("informe TOOL e PERFIL; use aiswitch --help")
+		err = errors.New("informe TOOL e PERFIL; use ai-switch --help")
 		return
 	}
 	tool, err = launch.Normalize(args[0])
@@ -246,7 +246,7 @@ func parseLaunch(args []string, selected string) (tool, name string, extra []str
 		args = args[1:]
 	}
 	if name == "" {
-		err = errors.New("informe PERFIL ou selecione com aiswitch use PERFIL")
+		err = errors.New("informe PERFIL ou selecione com ai-switch use PERFIL")
 		return
 	}
 	if len(args) > 0 {
@@ -265,7 +265,7 @@ func Main() int {
 		err = (App{Out: os.Stdout, Err: os.Stderr, Environ: os.Environ(), Executable: exe, Execute: launch.Execute, Resolve: launch.Resolve}).Run(os.Args[1:])
 	}
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "aiswitch:", err)
+		fmt.Fprintln(os.Stderr, "ai-switch:", err)
 		return 1
 	}
 	return 0

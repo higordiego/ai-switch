@@ -8,7 +8,7 @@ import (
 func TestMainEntrypoint(t *testing.T) {
 	oldArgs, oldExit := os.Args, exit
 	t.Cleanup(func() { os.Args, exit = oldArgs, oldExit })
-	os.Args = []string{"aiswitch", "version"}
+	os.Args = []string{"ai-switch", "version"}
 	called, code := false, -1
 	exit = func(got int) { called, code = true, got }
 	main()

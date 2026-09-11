@@ -43,7 +43,7 @@ func TestTmuxIndependentPanesAndCtrlC(t *testing.T) {
 	})
 	logs := t.TempDir()
 	script := func(p string) string {
-		return "eval \"$(" + shq(binary) + " shell-init bash)\"; aiswitch use " + p + "; codex wait-signal; printf 'EXIT=%s\\n' \"$?\"; exec sleep 20"
+		return "eval \"$(" + shq(binary) + " shell-init bash)\"; ai-switch use " + p + "; codex wait-signal; printf 'EXIT=%s\\n' \"$?\"; exec sleep 20"
 	}
 	paneA := call("new-session", "-d", "-P", "-F", "#{pane_id}", "-s", "isolation", "-x", "180", "-y", "40", "bash --noprofile --norc -c "+shq(script("a")))
 	paneB := call("split-window", "-h", "-P", "-F", "#{pane_id}", "-t", paneA, "bash --noprofile --norc -c "+shq(script("b")))

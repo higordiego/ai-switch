@@ -15,7 +15,7 @@ import (
 func TestCLIFlow(t *testing.T) {
 	var out, stderr bytes.Buffer
 	var plans []launch.Plan
-	a := App{Out: &out, Err: &stderr, Executable: "/bin/aiswitch", Environ: []string{"AISWITCH_ROOT=" + filepath.Join(t.TempDir(), "store")}, Execute: func(p launch.Plan) error { plans = append(plans, p); return nil }}
+	a := App{Out: &out, Err: &stderr, Executable: "/bin/ai-switch", Environ: []string{"AISWITCH_ROOT=" + filepath.Join(t.TempDir(), "store")}, Execute: func(p launch.Plan) error { plans = append(plans, p); return nil }}
 	run := func(args ...string) string {
 		t.Helper()
 		out.Reset()
@@ -73,13 +73,13 @@ func TestCLICommandSurface(t *testing.T) {
 	root := filepath.Join(t.TempDir(), "store")
 	var out, stderr bytes.Buffer
 	executed := 0
-	a := App{Out: &out, Err: &stderr, Executable: "/bin/aiswitch", Environ: []string{"AISWITCH_ROOT=" + root}, Execute: func(launch.Plan) error { executed++; return nil }}
+	a := App{Out: &out, Err: &stderr, Executable: "/bin/ai-switch", Environ: []string{"AISWITCH_ROOT=" + root}, Execute: func(launch.Plan) error { executed++; return nil }}
 	for _, args := range [][]string{{"help"}, {"-h"}, {"--help"}} {
 		out.Reset()
 		if err := a.Run(args); err != nil {
 			t.Fatal(err)
 		}
-		if !strings.Contains(out.String(), "aiswitch") {
+		if !strings.Contains(out.String(), "ai-switch") {
 			t.Fatal("help missing")
 		}
 	}
@@ -100,7 +100,7 @@ func TestCLICommandSurface(t *testing.T) {
 		if err := a.Run(args); err != nil {
 			t.Fatal(err)
 		}
-		if !strings.Contains(out.String(), "aiswitch()") || !strings.Contains(out.String(), "cursor-agent()") {
+		if !strings.Contains(out.String(), "ai-switch()") || !strings.Contains(out.String(), "aiswitch()") || !strings.Contains(out.String(), "cursor-agent()") {
 			t.Fatal("shell integration incomplete")
 		}
 	}
@@ -153,11 +153,11 @@ func TestCLICommandSurface(t *testing.T) {
 func TestMainReturnsSuccessAndFailure(t *testing.T) {
 	oldArgs := os.Args
 	t.Cleanup(func() { os.Args = oldArgs })
-	os.Args = []string{"aiswitch", "version"}
+	os.Args = []string{"ai-switch", "version"}
 	if got := Main(); got != 0 {
 		t.Fatalf("success code: %d", got)
 	}
-	os.Args = []string{"aiswitch", "unknown"}
+	os.Args = []string{"ai-switch", "unknown"}
 	if got := Main(); got != 1 {
 		t.Fatalf("failure code: %d", got)
 	}

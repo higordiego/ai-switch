@@ -54,10 +54,10 @@ jobs:
           for pair in "darwin amd64" "darwin arm64" "linux amd64" "linux arm64"; do
             set -- $pair
             GOOS=$1 GOARCH=$2
-            out="dist/aiswitch_${VERSION}_${GOOS}_${GOARCH}"
+            out="dist/ai-switch_${VERSION}_${GOOS}_${GOARCH}"
             echo "→ ${out}"
             CGO_ENABLED=0 GOOS="$GOOS" GOARCH="$GOARCH" \
-              go build -trimpath -ldflags "-s -w" -o "$out" ./cmd/aiswitch
+              go build -trimpath -ldflags "-s -w" -o "$out" ./cmd/ai-switch
             (cd dist && sha256sum "$(basename "$out")" > "$(basename "$out").sha256")
           done
           ls -lah dist
@@ -67,7 +67,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.version }}
-          name: aiswitch ${{ steps.version.outputs.version }}
+          name: ai-switch ${{ steps.version.outputs.version }}
           generate_release_notes: true
           files: dist/*
         env:

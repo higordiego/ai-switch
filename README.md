@@ -1,8 +1,8 @@
-# aiswitch
+# ai-switch
 
 ```
 ╭─[ AISWITCH // IDENTITY CONTROL ]─────────────────────────────╮
-│  ◈ AISWITCH                                       v0.1.2     │
+│  ◈ AISWITCH                                       v0.1.3     │
 │  isolated identities for coding agents                       │
 ╰──────────────────────────────────────────────────────────────╯
 ```
@@ -23,27 +23,31 @@ curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.s
 
 ---
 
+> CLI: **`ai-switch`** (mesmo nome do repositório). Storage continua em `~/.aiswitch` e a marca da TUI permanece **AISWITCH**.
+> Após `shell-init`, `aiswitch` continua disponível como alias de `ai-switch`.
+
+
 ## Por que existe?
 
 Claude Code, Codex CLI e Cursor Agent CLI autenticam em storage/env **global do
 usuário**. No mesmo Mac isso mistura conta pessoal e corporativa, herda tokens
 do shell pai e força logout/login toda hora.
 
-**aiswitch** cria um profile isolado (dirs + env) e deixa a troca explícita —
+**ai-switch** cria um profile isolado (dirs + env) e deixa a troca explícita —
 sem ler, copiar ou imprimir secrets.
 
 ---
 
-## O que existe hoje (v0.1.2)
+## O que existe hoje (v0.1.3)
 
 | Área | Suporte real |
 |------|----------------|
 | Agents | `claude` (Claude Code), `codex` (Codex), `cursor` (Cursor Agent CLI) |
 | Storage | `~/.aiswitch/profiles/<nome>/` com `claude/`, `anthropic/`, `codex/`, `cursor/` |
 | CLI | `create`, `rename`, `list`, `current`, `env`, `doctor`, `login`, `logout`, `unlink`, `status`, `run`, `shell-init`, `version` |
-| Shell hooks | `aiswitch use` / `switch` / `deactivate` + wrappers `claude`, `codex`, `cursor-agent`, `agent` |
+| Shell hooks | `ai-switch use` / `switch` / `deactivate` + wrappers `claude`, `codex`, `cursor-agent`, `agent` |
 | TUI | home, detalhes do profile, pick de tool, create wizard, rename, delete confirm, switch result |
-| Delete | **somente na TUI** (não há `aiswitch delete` na CLI) |
+| Delete | **somente na TUI** (não há `ai-switch delete` na CLI) |
 | Secrets na UI | nunca — só estado `● LINKED` / `○ NOT LINKED` |
 
 **Fora do escopo atual:** Gemini CLI, editor Cursor desktop, conta default global.
@@ -72,7 +76,7 @@ Opções:
 
 ```sh
 # versão fixa
-curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | VERSION=v0.1.2 sh
+curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | VERSION=v0.1.3 sh
 
 # outro diretório (ex.: /usr/local/bin)
 curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | INSTALL_DIR=/usr/local/bin sh
@@ -81,8 +85,8 @@ curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.s
 Confirme:
 
 ```sh
-aiswitch version
-aiswitch doctor
+ai-switch version
+ai-switch doctor
 ```
 
 Se o comando não for encontrado, adicione `~/.local/bin` ao `PATH`:
@@ -100,9 +104,9 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 Se você já tem a toolchain Go:
 
 ```sh
-go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
+go install github.com/higordiego/ai-switch/cmd/ai-switch@latest
 # ou
-go install github.com/higordiego/ai-switch/cmd/aiswitch@v0.1.2
+go install github.com/higordiego/ai-switch/cmd/ai-switch@v0.1.3
 ```
 
 Binário em `$(go env GOPATH)/bin` (geralmente `~/go/bin`).
@@ -114,19 +118,19 @@ Sem script: baixe em
 (`darwin`/`linux` × `amd64`/`arm64` + `.sha256`).
 
 ```sh
-chmod +x aiswitch_v*_darwin_arm64
-mv aiswitch_v*_darwin_arm64 ~/.local/bin/aiswitch
+chmod +x ai-switch_v*_darwin_arm64
+mv ai-switch_v*_darwin_arm64 ~/.local/bin/ai-switch
 ```
 
 ### Desenvolvimento (clone + make)
 
 ```sh
 git clone git@github.com:higordiego/ai-switch.git aiswitch
-cd aiswitch
-make build            # → bin/aiswitch
-make install          # → ~/.local/bin/aiswitch
+cd ai-switch
+make build            # → bin/ai-switch
+make install          # → ~/.local/bin/ai-switch
 # ou:
-go install ./cmd/aiswitch
+go install ./cmd/ai-switch
 ```
 
 ---
@@ -135,43 +139,43 @@ go install ./cmd/aiswitch
 
 ```sh
 # 1) profiles
-aiswitch create trabalho pessoal
+ai-switch create trabalho pessoal
 
-# 2) login nativo por agent (aiswitch só isola o ambiente)
-aiswitch login claude trabalho
-aiswitch login codex trabalho
-aiswitch login cursor trabalho
+# 2) login nativo por agent (ai-switch só isola o ambiente)
+ai-switch login claude trabalho
+ai-switch login codex trabalho
+ai-switch login cursor trabalho
 
 # 3) ativar no shell atual
-eval "$(aiswitch shell-init zsh)"   # ou: bash
-aiswitch use trabalho
+eval "$(ai-switch shell-init zsh)"   # ou: bash
+ai-switch use trabalho
 claude                              # roda no profile ativo
 
 # 4) ou abrir a TUI
-aiswitch
+ai-switch
 ```
 
 Outro terminal → outro profile:
 
 ```sh
-eval "$(aiswitch shell-init zsh)"
-aiswitch use pessoal
+eval "$(ai-switch shell-init zsh)"
+ai-switch use pessoal
 codex
 ```
 
 Launch sem alterar o shell:
 
 ```sh
-aiswitch run claude trabalho
-aiswitch run codex pessoal -- exec --help
-aiswitch run cursor trabalho -- --plan
+ai-switch run claude trabalho
+ai-switch run codex pessoal -- exec --help
+ai-switch run cursor trabalho -- --plan
 ```
 
 ---
 
 ## TUI — o que a tela realmente faz
 
-`aiswitch` (sem args) abre a interface Bubble Tea. Assinatura no rodapé:
+`ai-switch` (sem args) abre a interface Bubble Tea. Assinatura no rodapé:
 `// feito por Higor Diego`.
 
 ### Telas
@@ -190,7 +194,7 @@ aiswitch run cursor trabalho -- --plan
 
 ```
 ╭─[ AISWITCH // IDENTITY CONTROL ]─────────────────────────────╮
-│  ◈ AISWITCH                                       v0.1.2     │
+│  ◈ AISWITCH                                       v0.1.3     │
 │  isolated identities for coding agents                       │
 ╰──────────────────────────────────────────────────────────────╯
 
@@ -294,12 +298,12 @@ aiswitch run cursor trabalho -- --plan
 
 São estados independentes.
 
-### Activate na TUI vs `aiswitch use`
+### Activate na TUI vs `ai-switch use`
 
 | Mecanismo | Efeito |
 |-----------|--------|
 | TUI `[a]`/`[s]` | Ativa na sessão da TUI e mostra `SWITCH IDENTITY` por agent |
-| `eval "$(aiswitch shell-init …)"` + `aiswitch use PERFIL` | Persiste no **shell pai** (`export AISWITCH_PROFILE=…`) |
+| `eval "$(ai-switch shell-init …)"` + `ai-switch use PERFIL` | Persiste no **shell pai** (`export AISWITCH_PROFILE=…`) |
 
 A TUI é subprocesso: ela **não** altera o shell pai sozinha.
 
@@ -328,23 +332,23 @@ A TUI é subprocesso: ela **não** altera o shell pai sozinha.
 Comandos implementados em `internal/cli/app.go`:
 
 ```text
-aiswitch                         # abre a TUI
-aiswitch create PERFIL [PERFIL...]
-aiswitch rename ANTIGO NOVO
-aiswitch list [--json]
-aiswitch current
-aiswitch doctor [PERFIL]
-aiswitch env PERFIL
+ai-switch                         # abre a TUI
+ai-switch create PERFIL [PERFIL...]
+ai-switch rename ANTIGO NOVO
+ai-switch list [--json]
+ai-switch current
+ai-switch doctor [PERFIL]
+ai-switch env PERFIL
 
-aiswitch login  TOOL [PERFIL] [-- ARGS...]
-aiswitch logout TOOL [PERFIL]
-aiswitch unlink TOOL [PERFIL]      # alias de logout no launcher
-aiswitch status TOOL [PERFIL] [-- ARGS...]
-aiswitch run    TOOL [PERFIL] [-- ARGS...]
+ai-switch login  TOOL [PERFIL] [-- ARGS...]
+ai-switch logout TOOL [PERFIL]
+ai-switch unlink TOOL [PERFIL]      # alias de logout no launcher
+ai-switch status TOOL [PERFIL] [-- ARGS...]
+ai-switch run    TOOL [PERFIL] [-- ARGS...]
 
-aiswitch shell-init [zsh|bash]
-aiswitch version | --version
-aiswitch help | -h | --help
+ai-switch shell-init [zsh|bash]
+ai-switch version | --version
+ai-switch help | -h | --help
 ```
 
 `TOOL`: `claude` | `codex` | `cursor` (também aceita `cursor-agent` / `agent` → normaliza para `cursor`)
@@ -355,13 +359,13 @@ Sem `PERFIL`, usa `AISWITCH_PROFILE`. **Não existe conta padrão global.**
 
 ### Shell integration (`shell-init`)
 
-Após `eval "$(aiswitch shell-init zsh)"`:
+Após `eval "$(ai-switch shell-init zsh)"`:
 
 | Comando | Função |
 |---------|--------|
-| `aiswitch use PERFIL` / `aiswitch switch PERFIL` | `eval` de `aiswitch env` no shell atual |
-| `aiswitch deactivate` | `unset AISWITCH_PROFILE` |
-| `claude` / `codex` / `cursor-agent` / `agent` | se houver profile ativo → `aiswitch run <tool> -- …` |
+| `ai-switch use PERFIL` / `ai-switch switch PERFIL` | `eval` de `ai-switch env` no shell atual |
+| `ai-switch deactivate` | `unset AISWITCH_PROFILE` |
+| `claude` / `codex` / `cursor-agent` / `agent` | se houver profile ativo → `ai-switch run <tool> -- …` |
 
 ### tmux
 
@@ -369,13 +373,13 @@ Cada pane carrega `shell-init` e escolhe seu profile:
 
 ```sh
 tmux new -s contas
-eval "$(aiswitch shell-init zsh)"
-aiswitch use trabalho
+eval "$(ai-switch shell-init zsh)"
+ai-switch use trabalho
 codex
 
 tmux split-window -h
-eval "$(aiswitch shell-init zsh)"
-aiswitch use pessoal
+eval "$(ai-switch shell-init zsh)"
+ai-switch use pessoal
 claude
 ```
 
@@ -384,7 +388,7 @@ claude
 ## Arquitetura real do repo
 
 ```
-cmd/aiswitch/           entrypoint
+cmd/ai-switch/           entrypoint
 internal/cli/
   app.go                CLI commands
   shell.go              shell-init script
@@ -447,17 +451,17 @@ CI: [ci.yml](.github/workflows/ci.yml) · Releases: [release.yml](.github/workfl
 
 ## FAQ
 
-**O aiswitch lê meus tokens?**  
+**O ai-switch lê meus tokens?**  
 Não. Isola diretórios e detecta só se existe estrutura de auth.
 
 **Posso deletar profile pela CLI?**  
 Não nesta versão. Delete é fluxo da TUI (`[d]` + confirmação `[y]`).
 
 **Activate na TUI muda meu zsh?**  
-Não. Para o shell pai use `aiswitch use` depois do `shell-init`.
+Não. Para o shell pai use `ai-switch use` depois do `shell-init`.
 
 **`cursor` é o editor?**  
-Não — é o **Cursor Agent CLI**. Desktop fica fora do v0.1.2.
+Não — é o **Cursor Agent CLI**. Desktop fica fora do v0.1.3.
 
 **Tem Gemini?**  
 Não. Roadmap apenas.

@@ -135,7 +135,7 @@ func validateArgs(tool string, args []string) error {
 			break
 		}
 		if tool == "cursor" && (arg == "--api-key" || strings.HasPrefix(arg, "--api-key=") || arg == "-H" || arg == "--header" || strings.HasPrefix(arg, "--header=")) {
-			return errors.New("credencial por argumento substitui a conta; use aiswitch login cursor PERFIL")
+			return errors.New("credencial por argumento substitui a conta; use ai-switch login cursor PERFIL")
 		}
 		if tool != "codex" {
 			continue
@@ -155,7 +155,7 @@ func validateArgs(tool string, args []string) error {
 		key, _, _ := strings.Cut(value, "=")
 		key = strings.Trim(strings.TrimSpace(key), "\"'")
 		if key == "cli_auth_credentials_store" {
-			return errors.New("cli_auth_credentials_store e gerenciado pelo aiswitch")
+			return errors.New("cli_auth_credentials_store e gerenciado pelo ai-switch")
 		}
 	}
 	return nil

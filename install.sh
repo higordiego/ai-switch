@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-# aiswitch installer — downloads a prebuilt binary from GitHub Releases.
+# ai-switch installer — downloads a prebuilt binary from GitHub Releases.
 # Usage:
 #   curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | sh
 #   curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | VERSION=v0.1.2 sh
@@ -10,7 +10,7 @@
 set -eu
 
 REPO="${REPO:-higordiego/ai-switch}"
-BINARY_NAME="${BINARY_NAME:-aiswitch}"
+BINARY_NAME="${BINARY_NAME:-ai-switch}"
 INSTALL_DIR="${INSTALL_DIR:-${HOME}/.local/bin}"
 VERSION="${VERSION:-}"
 GITHUB_API="${GITHUB_API:-https://api.github.com}"
@@ -25,7 +25,7 @@ cleanup() {
 trap cleanup EXIT INT TERM
 
 say() { printf '%s\n' "$*"; }
-err() { printf 'aiswitch-install: %s\n' "$*" >&2; exit 1; }
+err() { printf 'ai-switch-install: %s\n' "$*" >&2; exit 1; }
 
 need_cmd() {
   command -v "$1" >/dev/null 2>&1 || err "comando obrigatorio ausente: $1"
@@ -124,13 +124,13 @@ main() {
   bin_url="${base}/${asset}"
   sum_url="${base}/${asset}.sha256"
 
-  say "aiswitch installer"
+  say "ai-switch installer"
   say "  repo:    ${REPO}"
   say "  version: ${version}"
   say "  target:  ${os}/${arch}"
   say "  dest:    ${INSTALL_DIR}/${BINARY_NAME}"
 
-  tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/aiswitch-install.XXXXXX")"
+  tmp_dir="$(mktemp -d "${TMPDIR:-/tmp}/ai-switch-install.XXXXXX")"
   bin_path="${tmp_dir}/${asset}"
   sum_path="${tmp_dir}/${asset}.sha256"
 
@@ -153,6 +153,11 @@ main() {
   mv -f "$bin_path" "${INSTALL_DIR}/${BINARY_NAME}"
   chmod 755 "${INSTALL_DIR}/${BINARY_NAME}"
 
+  # Compatibility alias with the older command name.
+  if [ "${BINARY_NAME}" = "ai-switch" ]; then
+    ln -sfn "${BINARY_NAME}" "${INSTALL_DIR}/aiswitch"
+  fi
+
   say ""
   say "instalado: ${INSTALL_DIR}/${BINARY_NAME}"
   if "${INSTALL_DIR}/${BINARY_NAME}" version >/dev/null 2>&1; then
@@ -169,9 +174,9 @@ main() {
 
   say ""
   say "proximos passos:"
-  say "  aiswitch doctor"
-  say "  aiswitch                 # TUI"
-  say "  eval \"\$(aiswitch shell-init zsh)\" && aiswitch use <perfil>"
+  say "  ai-switch doctor"
+  say "  ai-switch                 # TUI"
+  say "  eval \"\$(ai-switch shell-init zsh)\" && ai-switch use <perfil>"
   say ""
   say "feito por Higor Diego"
 }

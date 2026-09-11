@@ -1,12 +1,12 @@
-# Contributing to aiswitch
+# Contributing to ai-switch
 
 Thanks for helping improve an identity control plane for coding agents.
 
 ## Development setup
 
 ```sh
-git clone git@github.com:higordiego/ai-switch.git aiswitch
-cd aiswitch
+git clone git@github.com:higordiego/ai-switch.git ai-switch
+cd ai-switch
 go test ./...
 make verify
 ```
@@ -20,7 +20,7 @@ curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.s
 Go developers can also use:
 
 ```sh
-go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
+go install github.com/higordiego/ai-switch/cmd/ai-switch@latest
 ```
 
 Requirements:
@@ -32,7 +32,7 @@ Requirements:
 ## Project map
 
 ```
-cmd/aiswitch/          CLI entrypoint
+cmd/ai-switch/          CLI entrypoint
 internal/cli/          CLI commands + TUI (app, tui_*, theme, layout, shell)
 internal/profile/      isolated profile storage (Create/Get/List/Rename/Delete)
 internal/launch/       env scrub + process launch

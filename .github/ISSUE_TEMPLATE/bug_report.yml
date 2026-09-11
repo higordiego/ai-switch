@@ -13,7 +13,7 @@ body:
     attributes:
       label: What happened?
       description: Clear description of the bug.
-      placeholder: When I run `aiswitch use trabalho`, ...
+      placeholder: When I run `ai-switch use trabalho`, ...
     validations:
       required: true
 
@@ -30,7 +30,7 @@ body:
       label: Reproduction steps
       description: Minimal steps without secrets.
       placeholder: |
-        1. aiswitch create demo
+        1. ai-switch create demo
         2. aiswitch login claude demo
         3. ...
     validations:
@@ -40,7 +40,7 @@ body:
     id: version
     attributes:
       label: aiswitch version
-      placeholder: output of `aiswitch version`
+      placeholder: output of `ai-switch version`
     validations:
       required: true
 

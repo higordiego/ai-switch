@@ -23,12 +23,12 @@ func TestMain(m *testing.M) {
 	if err != nil {
 		panic(err)
 	}
-	binary = filepath.Join(dir, "aiswitch")
+	binary = filepath.Join(dir, "ai-switch")
 	providerDir = filepath.Join(dir, "providers")
 	if err = os.Mkdir(providerDir, 0700); err != nil {
 		panic(err)
 	}
-	for _, build := range [][2]string{{binary, "../cmd/aiswitch"}, {filepath.Join(providerDir, "provider"), "../testdata/provider"}} {
+	for _, build := range [][2]string{{binary, "../cmd/ai-switch"}, {filepath.Join(providerDir, "provider"), "../testdata/provider"}} {
 		cmd := exec.Command("go", "build", "-o", build[0], build[1])
 		if output, err := cmd.CombinedOutput(); err != nil {
 			fmt.Fprintf(os.Stderr, "build: %v\n%s", err, output)
@@ -267,13 +267,13 @@ func TestShellIntegration(t *testing.T) {
 			login(t, env, "codex", "b", "account-B")
 			script := `set -eu
 eval "$(` + shq(binary) + ` shell-init ` + shell + `)"
-aiswitch use a
+ai-switch use a
 codex --version
-if aiswitch use missing; then exit 90; fi
-aiswitch current
-aiswitch switch b
+if ai-switch use missing; then exit 90; fi
+ai-switch current
+ai-switch switch b
 codex --version
-aiswitch deactivate
+ai-switch deactivate
 test -z "${AISWITCH_PROFILE-}"
 `
 			args := []string{"--noprofile", "--norc", "-c", script}
