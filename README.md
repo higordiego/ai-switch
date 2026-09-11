@@ -17,6 +17,10 @@ coding agents por terminal.
 
 > Feito por **Higor Diego** · [github.com/higordiego/ai-swtich](https://github.com/higordiego/ai-swtich)
 
+```sh
+go install github.com/higordiego/ai-swtich/cmd/aiswitch@latest
+```
+
 ---
 
 ## Por que existe?
