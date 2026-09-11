@@ -18,7 +18,7 @@ coding agents por terminal.
 > Feito por **Higor Diego** · [github.com/higordiego/ai-switch](https://github.com/higordiego/ai-switch)
 
 ```sh
-go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
+curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | sh
 ```
 
 ---
@@ -54,23 +54,28 @@ sem ler, copiar ou imprimir secrets.
 
 ### Requisitos
 
-- [Go](https://go.dev/dl/) (versão em `go.mod`, 1.25+)
-- macOS ou Linux
-- `$(go env GOPATH)/bin` no `PATH` (padrão: `~/go/bin`)
+- macOS ou Linux (`amd64` ou `arm64`)
+- `curl` ou `wget`
 - Agents no `PATH` conforme for usar: `claude`, `codex`, `cursor-agent`
 
-### Instalação recomendada (`go install`)
+Go **não** é necessário para a instalação via script ou binário de release.
 
-Uma linha — sem clonar o repositório e sem `make`:
+### Instalação recomendada (`curl | sh`)
+
+Baixa o binário da última release, valida o SHA-256 e instala em `~/.local/bin`:
 
 ```sh
-go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
+curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | sh
 ```
 
-Versão fixa (release):
+Opções:
 
 ```sh
-go install github.com/higordiego/ai-switch/cmd/aiswitch@v0.1.2
+# versão fixa
+curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | VERSION=v0.1.2 sh
+
+# outro diretório (ex.: /usr/local/bin)
+curl -fsSL https://raw.githubusercontent.com/higordiego/ai-switch/main/install.sh | INSTALL_DIR=/usr/local/bin sh
 ```
 
 Confirme:
@@ -80,21 +85,33 @@ aiswitch version
 aiswitch doctor
 ```
 
-O binário vai para `$(go env GOPATH)/bin/aiswitch`. Se o comando não for encontrado:
+Se o comando não for encontrado, adicione `~/.local/bin` ao `PATH`:
 
 ```sh
 # zsh
-echo 'export PATH="$(go env GOPATH)/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 
 # bash
-echo 'export PATH="$(go env GOPATH)/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 ```
 
-### Binários de release
+### Alternativa: `go install`
 
-Sem Go na máquina: baixe em
+Se você já tem a toolchain Go:
+
+```sh
+go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
+# ou
+go install github.com/higordiego/ai-switch/cmd/aiswitch@v0.1.2
+```
+
+Binário em `$(go env GOPATH)/bin` (geralmente `~/go/bin`).
+
+### Binário manual (release)
+
+Sem script: baixe em
 [Releases](https://github.com/higordiego/ai-switch/releases)
-(`darwin`/`linux` × `amd64`/`arm64` + `.sha256`), torne executável e coloque no `PATH`.
+(`darwin`/`linux` × `amd64`/`arm64` + `.sha256`).
 
 ```sh
 chmod +x aiswitch_v*_darwin_arm64
@@ -102,8 +119,6 @@ mv aiswitch_v*_darwin_arm64 ~/.local/bin/aiswitch
 ```
 
 ### Desenvolvimento (clone + make)
-
-Para contribuir ou build local:
 
 ```sh
 git clone git@github.com:higordiego/ai-switch.git aiswitch
