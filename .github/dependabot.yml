@@ -4,14 +4,22 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     labels:
       - dependencies
+    ignore:
+      # Major Charmbracelet bumps need a deliberate TUI review.
+      - dependency-name: "github.com/charmbracelet/*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 3
     labels:
       - dependencies
+    # Prefer patch/minor; majors are reviewed manually.
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
