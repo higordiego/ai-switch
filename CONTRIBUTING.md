@@ -11,6 +11,12 @@ go test ./...
 make verify
 ```
 
+End users should prefer:
+
+```sh
+go install github.com/higordiego/ai-swtich/cmd/aiswitch@latest
+```
+
 Requirements:
 
 - Go version from `go.mod`

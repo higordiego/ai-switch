@@ -1,4 +1,4 @@
-.PHONY: build test race vet verify tmux-test real-test fuzz install
+.PHONY: build test race vet verify tmux-test real-test fuzz install go-install
 
 build:
 	go build -trimpath -o bin/aiswitch ./cmd/aiswitch
@@ -22,6 +22,10 @@ real-test:
 
 fuzz:
 	go test ./internal/profile -run '^$$' -fuzz FuzzValidateName -fuzztime=5s
+
+# Local install for contributors (GOPATH/bin — same destination as `go install`).
+go-install:
+	go install ./cmd/aiswitch
 
 install:
 	mkdir -p "$(HOME)/.local/bin"

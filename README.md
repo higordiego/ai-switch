@@ -2,7 +2,7 @@
 
 ```
 ╭─[ AISWITCH // IDENTITY CONTROL ]─────────────────────────────╮
-│  ◈ AISWITCH                                       v0.1.0     │
+│  ◈ AISWITCH                                       v0.1.1     │
 │  isolated identities for coding agents                       │
 ╰──────────────────────────────────────────────────────────────╯
 ```
@@ -30,7 +30,7 @@ sem ler, copiar ou imprimir secrets.
 
 ---
 
-## O que existe hoje (v0.1.0)
+## O que existe hoje (v0.1.1)
 
 | Área | Suporte real |
 |------|----------------|
@@ -50,25 +50,64 @@ sem ler, copiar ou imprimir secrets.
 
 ### Requisitos
 
-- Go (versão em `go.mod`)
+- [Go](https://go.dev/dl/) (versão em `go.mod`, 1.25+)
 - macOS ou Linux
+- `$(go env GOPATH)/bin` no `PATH` (padrão: `~/go/bin`)
 - Agents no `PATH` conforme for usar: `claude`, `codex`, `cursor-agent`
 
-### Build / install
+### Instalação recomendada (`go install`)
+
+Uma linha — sem clonar o repositório e sem `make`:
+
+```sh
+go install github.com/higordiego/ai-swtich/cmd/aiswitch@latest
+```
+
+Versão fixa (release):
+
+```sh
+go install github.com/higordiego/ai-swtich/cmd/aiswitch@v0.1.1
+```
+
+Confirme:
+
+```sh
+aiswitch version
+aiswitch doctor
+```
+
+O binário vai para `$(go env GOPATH)/bin/aiswitch`. Se o comando não for encontrado:
+
+```sh
+# zsh
+echo 'export PATH="$(go env GOPATH)/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
+
+# bash
+echo 'export PATH="$(go env GOPATH)/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
+```
+
+### Binários de release
+
+Sem Go na máquina: baixe em
+[Releases](https://github.com/higordiego/ai-swtich/releases)
+(`darwin`/`linux` × `amd64`/`arm64` + `.sha256`), torne executável e coloque no `PATH`.
+
+```sh
+chmod +x aiswitch_v*_darwin_arm64
+mv aiswitch_v*_darwin_arm64 ~/.local/bin/aiswitch
+```
+
+### Desenvolvimento (clone + make)
+
+Para contribuir ou build local:
 
 ```sh
 git clone git@github.com:higordiego/ai-swtich.git aiswitch
 cd aiswitch
-make install          # → ~/.local/bin/aiswitch
-aiswitch version      # 0.1.0
-aiswitch doctor
-```
-
-Binários pré-compilados: [Releases](https://github.com/higordiego/ai-swtich/releases)
-(`darwin`/`linux` × `amd64`/`arm64` + `.sha256`).
-
-```sh
 make build            # → bin/aiswitch
+make install          # → ~/.local/bin/aiswitch
+# ou:
+go install ./cmd/aiswitch
 ```
 
 ---
@@ -132,7 +171,7 @@ aiswitch run cursor trabalho -- --plan
 
 ```
 ╭─[ AISWITCH // IDENTITY CONTROL ]─────────────────────────────╮
-│  ◈ AISWITCH                                       v0.1.0     │
+│  ◈ AISWITCH                                       v0.1.1     │
 │  isolated identities for coding agents                       │
 ╰──────────────────────────────────────────────────────────────╯
 
@@ -399,7 +438,7 @@ Não nesta versão. Delete é fluxo da TUI (`[d]` + confirmação `[y]`).
 Não. Para o shell pai use `aiswitch use` depois do `shell-init`.
 
 **`cursor` é o editor?**  
-Não — é o **Cursor Agent CLI**. Desktop fica fora do v0.1.0.
+Não — é o **Cursor Agent CLI**. Desktop fica fora do v0.1.1.
 
 **Tem Gemini?**  
 Não. Roadmap apenas.

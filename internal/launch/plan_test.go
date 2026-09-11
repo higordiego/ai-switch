@@ -9,7 +9,7 @@ import (
 	"sync"
 	"testing"
 
-	"aiswitch/internal/profile"
+	"github.com/higordiego/ai-swtich/internal/profile"
 )
 
 func TestResolve(t *testing.T) {

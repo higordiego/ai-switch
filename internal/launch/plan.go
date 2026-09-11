@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	"aiswitch/internal/profile"
+	"github.com/higordiego/ai-swtich/internal/profile"
 )
 
 var Tools = []string{"claude", "codex", "cursor"}

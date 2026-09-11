@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"aiswitch/internal/launch"
+	"github.com/higordiego/ai-swtich/internal/launch"
 
 	"github.com/charmbracelet/lipgloss"
 )

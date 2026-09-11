@@ -1,4 +1,4 @@
-module aiswitch
+module github.com/higordiego/ai-swtich
 
 go 1.25.0
 

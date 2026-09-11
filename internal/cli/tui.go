@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"aiswitch/internal/launch"
-	"aiswitch/internal/profile"
+	"github.com/higordiego/ai-swtich/internal/launch"
+	"github.com/higordiego/ai-swtich/internal/profile"
 
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"

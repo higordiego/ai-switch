@@ -8,11 +8,11 @@ import (
 	"os"
 	"strings"
 
-	"aiswitch/internal/launch"
-	"aiswitch/internal/profile"
+	"github.com/higordiego/ai-swtich/internal/launch"
+	"github.com/higordiego/ai-swtich/internal/profile"
 )
 
-const Version = "0.1.0"
+const Version = "0.1.1"
 
 const help = `aiswitch - contas independentes por terminal (macOS/Linux)
 
