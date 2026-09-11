@@ -125,7 +125,7 @@ mv ai-switch_v*_darwin_arm64 ~/.local/bin/ai-switch
 ### Desenvolvimento (clone + make)
 
 ```sh
-git clone git@github.com:higordiego/ai-switch.git aiswitch
+git clone git@github.com:higordiego/ai-switch.git ai-switch
 cd ai-switch
 make build            # → bin/ai-switch
 make install          # → ~/.local/bin/ai-switch
