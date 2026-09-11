@@ -11,14 +11,14 @@
 coding agents por terminal.
 
 [![Go](https://img.shields.io/badge/Go-1.25+-00ADD8?style=flat-square&logo=go&logoColor=white)](https://go.dev/)
-[![CI](https://github.com/higordiego/ai-swtich/actions/workflows/ci.yml/badge.svg)](https://github.com/higordiego/ai-swtich/actions/workflows/ci.yml)
+[![CI](https://github.com/higordiego/ai-switch/actions/workflows/ci.yml/badge.svg)](https://github.com/higordiego/ai-switch/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
-[![Release](https://img.shields.io/github/v/release/higordiego/ai-swtich?style=flat-square&include_prereleases&sort=semver)](https://github.com/higordiego/ai-swtich/releases)
+[![Release](https://img.shields.io/github/v/release/higordiego/ai-switch?style=flat-square&include_prereleases&sort=semver)](https://github.com/higordiego/ai-switch/releases)
 
-> Feito por **Higor Diego** · [github.com/higordiego/ai-swtich](https://github.com/higordiego/ai-swtich)
+> Feito por **Higor Diego** · [github.com/higordiego/ai-switch](https://github.com/higordiego/ai-switch)
 
 ```sh
-go install github.com/higordiego/ai-swtich/cmd/aiswitch@latest
+go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
 ```
 
 ---
@@ -64,13 +64,13 @@ sem ler, copiar ou imprimir secrets.
 Uma linha — sem clonar o repositório e sem `make`:
 
 ```sh
-go install github.com/higordiego/ai-swtich/cmd/aiswitch@latest
+go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
 ```
 
 Versão fixa (release):
 
 ```sh
-go install github.com/higordiego/ai-swtich/cmd/aiswitch@v0.1.1
+go install github.com/higordiego/ai-switch/cmd/aiswitch@v0.1.1
 ```
 
 Confirme:
@@ -93,7 +93,7 @@ echo 'export PATH="$(go env GOPATH)/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 ### Binários de release
 
 Sem Go na máquina: baixe em
-[Releases](https://github.com/higordiego/ai-swtich/releases)
+[Releases](https://github.com/higordiego/ai-switch/releases)
 (`darwin`/`linux` × `amd64`/`arm64` + `.sha256`), torne executável e coloque no `PATH`.
 
 ```sh
@@ -106,7 +106,7 @@ mv aiswitch_v*_darwin_arm64 ~/.local/bin/aiswitch
 Para contribuir ou build local:
 
 ```sh
-git clone git@github.com:higordiego/ai-swtich.git aiswitch
+git clone git@github.com:higordiego/ai-switch.git aiswitch
 cd aiswitch
 make build            # → bin/aiswitch
 make install          # → ~/.local/bin/aiswitch

@@ -9,7 +9,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/higordiego/ai-swtich/internal/profile"
+	"github.com/higordiego/ai-switch/internal/profile"
 )
 
 func TestResolve(t *testing.T) {

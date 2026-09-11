@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/higordiego/ai-swtich/internal/launch"
-	"github.com/higordiego/ai-swtich/internal/profile"
+	"github.com/higordiego/ai-switch/internal/launch"
+	"github.com/higordiego/ai-switch/internal/profile"
 
 	tea "github.com/charmbracelet/bubbletea"
 )

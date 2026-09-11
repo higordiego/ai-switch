@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/higordiego/ai-swtich/internal/cli"
+	"github.com/higordiego/ai-switch/internal/cli"
 	"os"
 )
 

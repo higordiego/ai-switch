@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/higordiego/ai-swtich/internal/launch"
+	"github.com/higordiego/ai-switch/internal/launch"
 
 	"github.com/charmbracelet/lipgloss"
 )

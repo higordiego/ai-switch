@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/higordiego/ai-swtich/internal/launch"
+	"github.com/higordiego/ai-switch/internal/launch"
 )
 
 func TestCLIFlow(t *testing.T) {

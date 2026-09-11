@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/higordiego/ai-swtich/internal/launch"
-	"github.com/higordiego/ai-swtich/internal/profile"
+	"github.com/higordiego/ai-switch/internal/launch"
+	"github.com/higordiego/ai-switch/internal/profile"
 )
 
 const Version = "0.1.1"

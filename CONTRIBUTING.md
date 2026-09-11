@@ -5,7 +5,7 @@ Thanks for helping improve an identity control plane for coding agents.
 ## Development setup
 
 ```sh
-git clone git@github.com:higordiego/ai-swtich.git aiswitch
+git clone git@github.com:higordiego/ai-switch.git aiswitch
 cd aiswitch
 go test ./...
 make verify
@@ -14,7 +14,7 @@ make verify
 End users should prefer:
 
 ```sh
-go install github.com/higordiego/ai-swtich/cmd/aiswitch@latest
+go install github.com/higordiego/ai-switch/cmd/aiswitch@latest
 ```
 
 Requirements:

@@ -3,7 +3,7 @@ package cli
 import (
 	"strings"
 
-	"github.com/higordiego/ai-swtich/internal/launch"
+	"github.com/higordiego/ai-switch/internal/launch"
 
 	"github.com/charmbracelet/bubbles/textinput"
 	tea "github.com/charmbracelet/bubbletea"
