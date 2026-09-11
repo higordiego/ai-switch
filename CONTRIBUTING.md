@@ -21,10 +21,12 @@ Requirements:
 
 ```
 cmd/aiswitch/          CLI entrypoint
-internal/cli/          commands + interactive TUI
-internal/profile/      isolated profile storage
-internal/launch/       environment isolation + process launch
+internal/cli/          CLI commands + TUI (app, tui_*, theme, layout, shell)
+internal/profile/      isolated profile storage (Create/Get/List/Rename/Delete)
+internal/launch/       env scrub + process launch
 integration/           PTY / tmux / real-CLI checks
+testdata/provider/     fake provider for isolation tests
+.github/workflows/     ci.yml + release.yml
 ```
 
 ## Guidelines
