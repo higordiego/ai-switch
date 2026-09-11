@@ -108,6 +108,7 @@ func TestCLICommandSurface(t *testing.T) {
 		t.Fatal(err)
 	}
 	a.Environ = append(a.Environ, "AISWITCH_PROFILE=work", "OPENAI_API_KEY=hidden")
+	a.Resolve = func(string) (string, error) { return "/usr/bin/true", nil }
 	for _, args := range [][]string{{"list", "--json"}, {"doctor"}, {"doctor", "work"}} {
 		out.Reset()
 		err := a.Run(args)

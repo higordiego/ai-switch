@@ -19,9 +19,15 @@ func TestResolve(t *testing.T) {
 	if _, err := Resolve("aiswitch-program-that-does-not-exist"); err == nil {
 		t.Fatal("resolved missing program")
 	}
-	if _, err := Resolve("cursor-agent"); err != nil {
-		if _, fallback := exec.LookPath("agent"); fallback != nil {
-			t.Fatal(err)
+	if _, err := exec.LookPath("cursor-agent"); err == nil {
+		if path, err := Resolve("cursor-agent"); err != nil || path == "" {
+			t.Fatalf("resolve cursor-agent: %v %q", err, path)
+		}
+		return
+	}
+	if _, err := exec.LookPath("agent"); err == nil {
+		if path, err := Resolve("cursor-agent"); err != nil || path == "" {
+			t.Fatalf("resolve cursor-agent via agent fallback: %v %q", err, path)
 		}
 	}
 }
