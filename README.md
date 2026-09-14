@@ -206,7 +206,7 @@ ai-switch run cursor trabalho -- --plan
     ├─ Codex                                            ●
     └─ Cursor Agent                                     ●
 
-    splitwave
+    higor-2
     ├─ Claude Code                                      ●
     ├─ Codex                                            ○
     └─ Cursor Agent                                     ○
